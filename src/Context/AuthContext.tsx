@@ -5,6 +5,7 @@ import IUser from "../Interfaces/IUser";
 interface AuthContextProps {
     isAuthenticated: boolean
     user: IUser | null
+    isLoading: boolean
     register: ({ name, email, password }: IUser) => Promise<void>
     login: ({ email, password }: IUser) => Promise<void>
     logout: () => Promise<void>
@@ -13,6 +14,7 @@ interface AuthContextProps {
 const AuthContext = createContext<AuthContextProps>({
     isAuthenticated: false,
     user: null,
+    isLoading: true,
     register: async ({}) => {},
     login: async ({}) => {},
     logout: async () => {},
@@ -23,6 +25,7 @@ export default AuthContext
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const getToken = () => localStorage.getItem("token")
     const setToken = (token: string) => localStorage.setItem("token", token)
@@ -39,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     setUser(user)
                 }
             }
-        })()
+        })().finally(() => setIsLoading(false))
     }, [isAuthenticated])
 
     const register = async ({ name, email, password }: IUser) => await AxiosPost("/auth/register", { name, email, password })
@@ -58,7 +61,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, user, register, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, isLoading, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

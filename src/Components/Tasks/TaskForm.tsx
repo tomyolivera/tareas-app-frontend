@@ -31,10 +31,8 @@ const TaskForm = () => {
     return (
         tasks ? 
         <div>
-            <div className="d-flex">
-                <Button className="align-self-center" onClick={() => (navigate("/tasks"))}>Volver</Button>
-                <h1 className="mx-3">Task Form</h1>
-            </div>
+            <Button className="align-self-center" onClick={() => (navigate("/tasks"))}>Volver</Button>
+            <h1 className="my-3">Task Form</h1>
             <Formulario
                 initialValues={initialValues}
                 onSubmit={handleOnSubmit}

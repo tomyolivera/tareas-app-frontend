@@ -13,25 +13,33 @@ const Tasks = () => {
         await deleteTask(id)
     }
 
+    const goToCreate = () => {
+        navigate("/tasks/add")
+    }
+
     return (
         <>
-            <Button className="mb-3" color="success" onClick={() => navigate("/tasks/add")}>Add task</Button>
+            <Button className="mb-3" color="success" onClick={goToCreate}>Add task</Button>
 
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {
-                    tasks.map(({ id, name, description, completed, created_at, updated_at }: ITask, i) => (
-                            <Col xs="12" md="6" lg="3" key={i} className="mb-3">
-                                <Task   id={id}
-                                        name={name}
-                                        description={description}
-                                        completed={completed}
-                                        created_at={created_at}
-                                        updated_at={updated_at}
-                                        handleDelete={handleDelete}
-                                    />
-                            </Col>
+                    tasks.length
+                        ? tasks.map(({ id, name, description, completed, created_at, updated_at }: ITask, i) => (
+                                <Col xs="12" md="6" lg="3" key={i} className="mb-3">
+                                    <Task   id={id}
+                                            name={name}
+                                            description={description}
+                                            completed={completed}
+                                            created_at={created_at}
+                                            updated_at={updated_at}
+                                            handleDelete={handleDelete}
+                                        />
+                                </Col>
+                            )
                         )
-                    )
+                    : <div>
+                        <h2>No tasks created yet!</h2>
+                    </div>
                 }
             </div>
         </>

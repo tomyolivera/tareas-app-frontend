@@ -1,9 +1,9 @@
 import { object, string, ref } from 'yup'
 
 const UserRegisterSchema = object().shape({
-    name: string().required("Name is missing"),
-    email: string().email("Not a valid email").required("Email is missing"),
-    password: string().required("Password is missing"),
+    name: string().max(60).required(),
+    email: string().email().required(),
+    password: string().min(8).required(),
     "repeat Password": string().oneOf([ref('password')], "Passwords don't match").required("Repeat password"),
 })
 

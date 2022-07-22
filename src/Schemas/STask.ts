@@ -1,8 +1,8 @@
 import { object, string } from 'yup'
 
 const TaskSchema = object().shape({
-    name: string().required("Name is missing"),
-    description: string().required("Description is missing"),
+    name: string().max(60).required(),
+    description: string().max(255).required(),
 })
 
 export default TaskSchema

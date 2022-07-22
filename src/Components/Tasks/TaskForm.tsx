@@ -15,9 +15,7 @@ const TaskForm = () => {
     useEffect(() => {
         if(id){
             const task = tasks.find(task => task.id === Number(id))
-            if(task){
-                setInitialValues({name: task.name, description: task.description})
-            }
+            task ? setInitialValues({name: task.name, description: task.description}) : navigate("/tasks")
         }
     }, [tasks])
 

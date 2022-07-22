@@ -34,7 +34,7 @@ const Formulario = ({ initialValues, validationSchema, editing, onSubmit, submit
                                             className="form-control"
                                             autoComplete="off" />
                                     {
-                                        errors[key] && <small className="text-danger">{errors[key]}</small>
+                                        errors[key] && <small className="text-danger">{primeraLetraMayuscula(errors[key])}</small>
                                     }
                                 </div>
                             ))

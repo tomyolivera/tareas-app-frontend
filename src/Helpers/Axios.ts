@@ -1,8 +1,8 @@
 import axios from "axios";
 
-let url_dev = "http://localhost:5000/api";
-let url_prod = "https://task-api-node-ts-prisma.herokuapp.com/api";
-let URL_BASE = url_prod
+let dev = "http://localhost:5000/api";
+let prod = "https://task-api-node-ts-prisma.herokuapp.com/api";
+let URL_BASE = dev
 
 export const AxiosGet = async (url: string, useAuth: boolean=false, base:string=URL_BASE) =>
 {

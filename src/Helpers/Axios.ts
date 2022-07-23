@@ -2,7 +2,8 @@ import axios from "axios";
 
 let dev = "http://localhost:5000/api";
 let prod = "https://task-api-node-ts-prisma.herokuapp.com/api";
-let URL_BASE = dev
+let URL_BASE = process.env.NODE_ENV === "production" ? prod : dev;
+console.log(process.env.NODE_ENV)
 
 export const AxiosGet = async (url: string, useAuth: boolean=false, base:string=URL_BASE) =>
 {

@@ -22,7 +22,7 @@ const Formulario = ({ initialValues, validationSchema, editing, onSubmit, submit
             validationSchema={validationSchema}
             onSubmit={onSubmit}
         >
-            {({ errors }: any) => (
+            {({ errors, isSubmitting }: any ) => (
                 <Form>
                     <>
                         {
@@ -42,7 +42,9 @@ const Formulario = ({ initialValues, validationSchema, editing, onSubmit, submit
 
             
                         <div className="form-group">
-                            <Button type="submit" color={submitColor}>{submitText}</Button>
+                            <Button disabled={isSubmitting} type="submit" color={submitColor}>
+                                {isSubmitting ? "Wait" : submitText}
+                            </Button>
                         </div>
                     </>
                 </Form>
